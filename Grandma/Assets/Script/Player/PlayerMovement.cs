@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
         {
             jump = true;
         }
-        if(Input.GetButtonDown("Crouch"))
+        if(Input.GetButtonDown("Crouch")) // 나중에 기어다니는거 추가할때 대가리 collider추가해서 컴포넌트에 추가하기!!!!!!!
         {
             crouch = true;
         } 
