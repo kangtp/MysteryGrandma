@@ -1,108 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
-using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UI;
+
+/*
+나에겐 패널이 존재 이름 ,대화 , 옵션 패널들이 존재
+지금 내가 해야하는 것은 npc에 맞게 이름 , 대화 , 옵션 패널들을 수정하는 것 
+내가 모르는 것은 대화가 여러개 있고 스페이스바를 누르면 다음 대화로 넘어가게 하기 
+*/
 
 public class Dialogue : MonoBehaviour
 {
-    public GameObject window;
-    public GameObject indicator;
-    public TMP_Text dialogueText;
-    public List<string> dialogues;
-    public float write_Speed;
-    private int index;
-    private int charindex;
-    private bool started;
-    private bool waitForNext;
-    
-    private void Awake()
-    {
-        ToggleIndicator(false);
-        ToggleWindow(false);
-    }
-    
-    public void ToggleWindow(bool show)
-    {
-        window.SetActive(show);
-    }
-    public void ToggleIndicator(bool show)
-    {
-        indicator.SetActive(show);
-    }
-    public void Strat_Dialogue()
-    {
+    public TMP_Text npcName; 
+    public TMP_Text npc_dialogues;
+    public string[] dialogueLines; 
+    public Canvas npc_canvas;
+    public int index=0;
+    bool started;
+    bool isNext=false;
+
+
+    private int currentDialogueIndex = 0; // 현재 대화 인덱스
+
+    private string currnet_String;
+    private void Start() {
         if(started)
             return;
-        
-        started=true;
-        ToggleWindow(true);
-        ToggleIndicator(true);
-        GetDialogue(0);
-    }
-    private void GetDialogue(int i)
-    {
-        index=i;
-        charindex = 0;
-        dialogueText.text=string.Empty;
-        StartCoroutine(Writing());
-   
-    }
-    public void EndDialogue()
-    {
-        started=false;
-        waitForNext =false;
-        StopAllCoroutines();
-        ToggleWindow(false);
-        ToggleIndicator(false);
-    }
-    IEnumerator Writing()
-    {
-        yield return new WaitForSeconds(write_Speed);
-        
-        string currnetDialogue =dialogues[index];
-        dialogueText.text+=currnetDialogue[charindex];
-        charindex++;
-        if(charindex<currnetDialogue.Length)
-        {
-            yield return new WaitForSeconds(write_Speed);
-            StartCoroutine(Writing());
-        }
-       
-        else
-        {
-            waitForNext=true;
-        }
-        
-        
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+        npc_dialogues.text=dialogueLines[0];
     }
 
+    
+    public void GetString(int index)
+    {
+        npc_dialogues.text= dialogueLines[index];
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if(!started)
-            return;
         
-        if(waitForNext && Input.GetKeyDown(KeyCode.Space))
-        {
-            waitForNext = false;
-            index++;
-            if(index < dialogues.Count)
-            {
-                GetDialogue(index);
-            }
-            else
-            {
-                ToggleIndicator(true);
-                EndDialogue();
-            }
-            
-        }
     }
 }
