@@ -57,7 +57,7 @@ public class NpcDialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            if(playerdetected && Input.GetKeyDown(KeyCode.Space)&&!dialogue_canvas.gameObject.activeSelf&&index==0)
+            if(playerdetected && Input.GetKeyDown(KeyCode.F)&&!dialogue_canvas.gameObject.activeSelf&&index==0)
             {
                 Debug.Log("space바 입력");
                
@@ -70,14 +70,14 @@ public class NpcDialogue : MonoBehaviour
                 index++;
                 
             }
-            else if(playerdetected && Input.GetKeyDown(KeyCode.Space) && index<gameObject.GetComponent<Dialogue>().dialogueLines.Length)
+            else if(playerdetected && Input.GetKeyDown(KeyCode.F) && index<gameObject.GetComponent<Dialogue>().dialogueLines.Length)
             {
                 Debug.Log("마지막 대사 출력");
                 gameObject.GetComponent<Dialogue>().GetString(index);
                 index++;
                 
             }
-            else if(index==gameObject.GetComponent<Dialogue>().dialogueLines.Length&&playerdetected && Input.GetKeyDown(KeyCode.Space))
+            else if(index==gameObject.GetComponent<Dialogue>().dialogueLines.Length&&playerdetected && Input.GetKeyDown(KeyCode.F))
             {
                 
                 Debug.Log("대화창 나가기");

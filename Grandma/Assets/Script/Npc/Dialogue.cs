@@ -36,9 +36,4 @@ public class Dialogue : MonoBehaviour
         npc_dialogues.text= dialogueLines[index];
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
