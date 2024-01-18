@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class item_detect : MonoBehaviour
 {
+    private bool item_show = false;
     public int item_code;
 
     public GameObject text;
@@ -12,13 +13,17 @@ public class item_detect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        if(item_show && Input.GetKeyDown(KeyCode.F))
+        {
+           this.gameObject.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag == "Player")
         {
             text.SetActive(true);
+            item_show = true;
         }
     }
 
@@ -26,6 +31,7 @@ public class item_detect : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             text.SetActive(false);
+            item_show = false;
         }
     }
 }
