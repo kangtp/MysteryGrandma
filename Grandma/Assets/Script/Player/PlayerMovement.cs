@@ -28,12 +28,12 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
         PlayerAnimator.SetFloat("Speed",Mathf.Abs(horizontalMove));
-        if(Input.GetButton("Jump"))
+        if(Input.GetButton("Jump") && runSpeed != 0)
         {
             jump = true;
             PlayerAnimator.SetBool("isJumping",true);
         }
-        if(Input.GetButtonDown("Crouch")) // 나중에 기어다니는거 추가할때 대가리 collider추가해서 컴포넌트에 추가하기!!!!!!!
+        if(Input.GetButtonDown("Crouch") && runSpeed != 0) // 나중에 기어다니는거 추가할때 대가리 collider추가해서 컴포넌트에 추가하기!!!!!!!
         {
             crouch = true;
         } 
