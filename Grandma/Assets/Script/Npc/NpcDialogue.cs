@@ -60,7 +60,7 @@ public class NpcDialogue : MonoBehaviour
             if(playerdetected && Input.GetKeyDown(KeyCode.F)&&!dialogue_canvas.gameObject.activeSelf&&index==0)
             {
                 Debug.Log("space바 입력");
-               
+                PlayerMovement.Instance.runSpeed = 0f;
                 sppechRenderer.enabled=true;
                 dialogue_canvas.gameObject.SetActive(true);
                 dialogue_canvas.enabled=true;
@@ -81,6 +81,7 @@ public class NpcDialogue : MonoBehaviour
             {
                 
                 Debug.Log("대화창 나가기");
+                PlayerMovement.Instance.runSpeed = 27.5f;
                 dialogue_canvas.gameObject.SetActive(false);
                 dialogue_canvas.GetComponent<Canvas>().enabled=false;
                 Debug.Log(index);

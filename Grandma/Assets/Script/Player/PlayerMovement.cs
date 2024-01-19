@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController2D controller;
 
+    static public PlayerMovement Instance;
+
     private Animator PlayerAnimator;
 
     public float runSpeed = 40f;
@@ -17,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Instance = this;
         PlayerAnimator = GetComponent<Animator>();
     }
 
