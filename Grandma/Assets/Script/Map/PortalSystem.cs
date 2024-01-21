@@ -2,12 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Warp : MonoBehaviour
+public class PortalSystem : MonoBehaviour
 {
+
     public Transform destination; // 이동할 위치의 Transform
     private Transform playerPos;
     private bool isInPortal = false;
+    public bool isOpen = false;
+    private SpriteRenderer spriteRenderer;
+    public Sprite openPortal;
+    public Sprite closePortal;
 
+    private void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
     void Update()
     {
         // 포탈에 진입하는지 여부를 확인
@@ -43,10 +52,24 @@ public class Warp : MonoBehaviour
     private void MoveToDestination()
     {
         // 이동할 위치로 이동
-        if (destination != null)
+        if (destination != null && isOpen)
         {
             // 플레이어의 위치를 이동할 위치로 설정
             playerPos.transform.position = destination.position;
         }
     }
+
+    
+    public void SetOpenPortal()
+    {
+        isOpen = true;
+        spriteRenderer.sprite = openPortal;
+    }
+
+    public void SetClosePortal()
+    {
+        isOpen = false;
+        spriteRenderer.sprite = closePortal;
+    }
+
 }
