@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
     public void onCrouch(bool crouch)
     {
         PlayerAnimator.SetBool("isCrouching",crouch);
+       
     }
 
     void FixedUpdate() 

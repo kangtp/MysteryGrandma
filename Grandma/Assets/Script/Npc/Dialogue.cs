@@ -18,10 +18,10 @@ public class Dialogue : MonoBehaviour
     public Canvas npc_canvas;
     public int index=0;
     bool started;
-    bool isNext=false;
+    
 
 
-    private int currentDialogueIndex = 0; // 현재 대화 인덱스
+    
 
     private string currnet_String;
     private void Start() {

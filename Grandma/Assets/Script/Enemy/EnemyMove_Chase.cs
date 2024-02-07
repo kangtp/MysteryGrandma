@@ -11,6 +11,7 @@ public class EnemyMove_Chase : MonoBehaviour
     SpriteRenderer spriteRenderer;
     public float speed;
     public int hp;
+    public GameObject player;
 
     private int chase=0;
 
@@ -52,12 +53,9 @@ public class EnemyMove_Chase : MonoBehaviour
         {
             
             StartCoroutine("Attack");
-            Debug.Log("플레이어 감지");
+            
         }
-        else if(!Detect_player())
-        {
-            Debug.Log("플레이어 안보임");
-        }
+       
 
     }
 
@@ -77,7 +75,6 @@ public class EnemyMove_Chase : MonoBehaviour
         //Sprite Animation
         //WalkSpeed변수를 nextMove로 초기화 
         animator.SetInteger("isRun",nextMove);
-
 
         //Flip Sprite
         if(nextMove != 0) //서있을 때 굳이 방향을 바꿀 필요가 없음 
@@ -104,7 +101,19 @@ public class EnemyMove_Chase : MonoBehaviour
     {
         Vector2 detect_player = new Vector2(rigid.position.x+nextMove,rigid.position.y);
         Debug.DrawRay(detect_player,new Vector3(nextMove,0,0),new Color(0,2,0));
+        bool fliped = spriteRenderer.flipX;
         RaycastHit2D ray_player = Physics2D.Raycast(detect_player,new Vector3(nextMove,0,0),1,LayerMask.GetMask("Player"));
+        if(nextMove ==0)
+        {
+            if(fliped)
+            {
+                ray_player = Physics2D.Raycast(detect_player,new Vector3(1,0,0),1,LayerMask.GetMask("Player"));
+            }
+            else
+            {
+                ray_player = Physics2D.Raycast(detect_player,new Vector3(-1,0,0),1,LayerMask.GetMask("Player"));
+            }
+        }
         if(ray_player)
         {
             
@@ -116,14 +125,35 @@ public class EnemyMove_Chase : MonoBehaviour
         }
         
     }
-    IEnumerator Attack()
+   IEnumerator Attack()
     {
         CancelInvoke();
         animator.SetBool("isAttack", true);
-        yield return new WaitForSeconds(1.01f);  //애니끝날때까지 기다리기
+        yield return new WaitForSeconds(0.3f); // 애니메이션 끝날 때까지 대기
+        
+
+        Vector2 enemyPosition = new Vector2(transform.position.x, transform.position.y);
+        int direction = (nextMove >= 0) ? -1 : 1;
+        RaycastHit2D rayPlayer = Physics2D.Raycast(enemyPosition, Vector2.left * direction, 2f, LayerMask.GetMask("Player"));
+        bool detect=(rayPlayer) ? true : false;
+        if (detect)
+        {
+            GameObject player = rayPlayer.collider.gameObject;
+            int directionX = transform.position.x - player.transform.position.x > 0 ? -1 : 1;
+            player.GetComponent<Rigidbody2D>().AddForce(new Vector2(directionX*1f, 1f), ForceMode2D.Impulse);
+            player.GetComponent<PlayerMovement>().onCrouch(true);
+            yield return new WaitForSeconds(0.6f);
+            player.GetComponent<PlayerMovement>().onCrouch(false);
+            detect=false;
+        }
+
         animator.SetBool("isAttack", false);
-        Invoke("Think", 0.3f);  // 대신에 Invoke 대신에 0초 후에 호출
+
+        // 여기에 플레이어 hp 삭제 
         StopCoroutine("Attack");
+        player.GetComponent<PlayerMovement>().onCrouch(false);
+        Invoke("Think", 1f);  // 대신에 Invoke 대신에 1초 후에 호출
+        
     }
     IEnumerator Die()
     {

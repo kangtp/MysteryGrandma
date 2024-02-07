@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMoving : MonoBehaviour
+public class Enemy_Fly : MonoBehaviour
 {
 
     Rigidbody2D rigid;
@@ -44,11 +44,6 @@ public class EnemyMoving : MonoBehaviour
         //탐지된 오브젝트가 null : 그 앞에 지형이 없음
         if(!raycast.collider){
             Turn();
-        }
-        else if(Detect_player())
-        {
-            StartCoroutine("Attack");
-            
         }
 
         /*if(Detect_player())
@@ -97,20 +92,8 @@ public class EnemyMoving : MonoBehaviour
     bool Detect_player()
     {
         Vector2 detect_player = new Vector2(rigid.position.x+nextMove,rigid.position.y);
-        bool fliped = spriteRenderer.flipX;
        
         RaycastHit2D ray_player = Physics2D.Raycast(detect_player,new Vector3(nextMove,0,0),1,LayerMask.GetMask("Player"));
-        if(nextMove ==0)
-        {
-            if(fliped)
-            {
-                ray_player = Physics2D.Raycast(detect_player,new Vector3(1,0,0),1,LayerMask.GetMask("Player"));
-            }
-            else
-            {
-                ray_player = Physics2D.Raycast(detect_player,new Vector3(-1,0,0),1,LayerMask.GetMask("Player"));
-            }
-        }
         if(ray_player)
         {
             
@@ -127,11 +110,7 @@ public class EnemyMoving : MonoBehaviour
     CancelInvoke();
     animator.SetBool("isAttack", true);
     yield return new WaitForSeconds(1.1f); // 애니메이션 끝날 때까지 대기
-    if(nextMove==0)
-    {
-        Debug.Log(animator.GetInteger("isRun"));
-        Debug.Log(animator.GetBool("isAttack"));
-    }
+    
 
     Vector2 enemyPosition = new Vector2(transform.position.x, transform.position.y);
     int direction = (nextMove >= 0) ? -1 : 1;
@@ -168,7 +147,11 @@ public class EnemyMoving : MonoBehaviour
     void Update()
     {
         
-       
+        if(Detect_player())
+        {
+            StartCoroutine("Attack");
+            
+        }
         if(Input.GetKeyDown(KeyCode.C))
         {
             hp--;

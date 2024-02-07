@@ -44,7 +44,7 @@ public class NpcDialogue : MonoBehaviour
             playerdetected=false;
             sppechRenderer.enabled=false;
             dialogue_canvas.enabled=false;
-            Debug.Log("없어져야지");
+           
             
         }
     }
