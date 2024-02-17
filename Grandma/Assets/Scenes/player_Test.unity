@@ -1502,7 +1502,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300008, guid: 6f5c6e1922389384cb1736af0690439b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bea62db788a3d472dacaad2fde05bdb1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1522,8 +1522,8 @@ Transform:
   m_GameObject: {fileID: 514659137}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.85, y: -1.08, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalPosition: {x: -7.4317, y: -2.1602, z: 0}
+  m_LocalScale: {x: 0.65, y: 0.65, z: 0.446}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1916819856}
@@ -1643,8 +1643,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.102125965, y: -0.10088658}
-  m_Size: {x: 0.7957481, y: 0.7957481}
+  m_Offset: {x: -0.053054333, y: -0.41003752}
+  m_Size: {x: 0.89389133, y: 1.8066225}
   m_Direction: 0
 --- !u!114 &514659143
 MonoBehaviour:
@@ -1713,9 +1713,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.06477992, y: 0.06478004}
+  m_Offset: {x: -0.06477992, y: 0.6585462}
   serializedVersion: 2
-  m_Radius: 0.18198884
+  m_Radius: 0.461697
 --- !u!1 &527779977
 GameObject:
   m_ObjectHideFlags: 0
@@ -7911,7 +7911,7 @@ Transform:
   m_GameObject: {fileID: 2013519762}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00000031789145, y: 1, z: -10}
+  m_LocalPosition: {x: 0.00000073359564, y: 2.3076923, z: -22.421524}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8060,7 +8060,7 @@ Transform:
   m_GameObject: {fileID: 2038958628}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.8499994, y: 0.41999996, z: -10}
+  m_LocalPosition: {x: -7.4316998, y: -0.6602001, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
