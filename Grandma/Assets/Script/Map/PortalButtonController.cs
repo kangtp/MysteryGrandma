@@ -8,6 +8,10 @@ public class NewBehaviourScript : MonoBehaviour
     private bool activate = false;
     public GameObject portal;
 
+    public Sprite lever_top;
+    public Sprite lever_bottom;
+    
+
     private void Start()
     {
         
@@ -49,11 +53,13 @@ public class NewBehaviourScript : MonoBehaviour
         {
             activate = true;
             portal.GetComponent<PortalSystem>().SetOpenPortal();
+            GetComponent<SpriteRenderer>().sprite = lever_bottom;
         }
         else
         {
             activate = false;
             portal.GetComponent<PortalSystem>().SetClosePortal();
+            GetComponent<SpriteRenderer>().sprite = lever_top;
         }
     }
 }
