@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     float horizontalMove = 0f;
     bool jump = false;
     bool crouch = false;
+    bool hide = false;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +41,19 @@ public class PlayerMovement : MonoBehaviour
         else if(Input.GetButtonUp("Crouch"))
         {
             crouch = false;
+        }
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            if(hide)
+            {
+                hide = false;
+                PlayerAnimator.SetBool("isHiding",hide);
+            }
+            else
+            {
+                hide = true;
+                PlayerAnimator.SetBool("isHiding",hide);
+            }
         }
     }
 
