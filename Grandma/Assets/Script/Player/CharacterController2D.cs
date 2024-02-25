@@ -11,6 +11,7 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
 	[SerializeField] private Transform m_CeilingCheck;							// A position marking where to check for ceilings
 	[SerializeField] private Collider2D m_CrouchDisableCollider;				// A collider that will be disabled when crouching
+	[SerializeField] private GameObject crouchCollider; // 기어다닐때의 collider
 
 	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
 	private bool m_Grounded;            // Whether or not the player is grounded.
@@ -29,6 +30,7 @@ public class CharacterController2D : MonoBehaviour
 
 	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
+	private Collider2D m_CrouchableCollider;
 
 	private void Awake()
 	{
@@ -39,6 +41,10 @@ public class CharacterController2D : MonoBehaviour
 
 		if (OnCrouchEvent == null)
 			OnCrouchEvent = new BoolEvent();
+
+		if (crouchCollider != null)	
+		    m_CrouchableCollider = crouchCollider.GetComponent<CapsuleCollider2D>();
+			
 	}
 
 	private void FixedUpdate()
@@ -92,11 +98,21 @@ public class CharacterController2D : MonoBehaviour
 				// Disable one of the colliders when crouching
 				if (m_CrouchDisableCollider != null)
 					m_CrouchDisableCollider.enabled = false;
+
+				if(m_CrouchableCollider != null)
+				{
+				    m_CrouchableCollider.enabled = true;
+				}
 			} else
 			{
 				// Enable the collider when not crouching
 				if (m_CrouchDisableCollider != null)
 					m_CrouchDisableCollider.enabled = true;
+
+				if(m_CrouchableCollider != null)
+				{
+				    m_CrouchableCollider.enabled = false;
+				}	
 
 				if (m_wasCrouching)
 				{
