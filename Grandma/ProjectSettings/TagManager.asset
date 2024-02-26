@@ -50,3 +50,6 @@ TagManager:
   - name: Platform
     uniqueID: 4140873963
     locked: 0
+  - name: Character
+    uniqueID: 298824889
+    locked: 0
